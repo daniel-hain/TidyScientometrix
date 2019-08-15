@@ -3,7 +3,7 @@ A (R) collection of mapping tools from natural language processing, multidimensi
 
 This package is still under development, but have a bit of patience, soon first updates are to follow, and enable the easy reconstruction of the analysis done in the paper:
 
-[Rakas, Marija, and Daniel S. Hain. "The state of innovation system research: What happens beneath the surface?." Research Policy (in press)](https://www.sciencedirect.com/science/article/pii/S0048733319301027)
+[Rakas, Marija, and Hain, Daniel S. (in press). "The state of innovation system research: What happens beneath the surface?." Research Policy](https://www.sciencedirect.com/science/article/pii/S0048733319301027)
 
 # Planned functionality
 In detail, the package will enable:
