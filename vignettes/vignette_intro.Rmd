@@ -1,0 +1,19 @@
+---
+title: "Vignette TidyScientometrix"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette TidyScientometrix}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(TidyScientometrix)
+```
