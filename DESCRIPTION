@@ -20,6 +20,6 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
 Depends: R (>= 3.4.2)
-Imports: dplyr, magrittr, tidygraph, ggplot, ggraph
+Imports: dplyr, magrittr, rlist, purrr, scales, tidygraph, ggplot2, ggraph
 Suggests: testthat, knitr, rmarkdown
 VignetteBuilder: knitr
