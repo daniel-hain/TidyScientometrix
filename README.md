@@ -7,13 +7,6 @@ This package is still under development, but have a bit of patience, soon first 
 
 It will also offer s set of 
 
-
-
-```{r}
-install_github("daniel-hain/TidyScientometrix", update = "always")
-```
-
-
 # Planned functionality
 In detail, the package will enable:
 
@@ -24,6 +17,14 @@ In detail, the package will enable:
 * Connectivity mapping between co-citation and bibliographic coupling communities
 * Coherence & diversity mapping of coupling communities
 * LDA topic modeling of paper abstracts
+
+# Install package
+
+Again, up to now, most functionality is not working properly. However, if you want to peak a bit, feel free to check out the current development version with:
+
+```{r}
+devtools::install_github("daniel-hain/TidyScientometrix", update = "always")
+```
 
 
 
