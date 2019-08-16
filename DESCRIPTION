@@ -6,7 +6,7 @@ Authors@R:
     person(given = "Daniel",
            family = "Hain",
            role = c("aut", "cre"),
-           email = "dsh@business.aau.dk
+           email = "dsh@business.aau.dk"
 Maintainer: Daniel Hain
 Description: A (R) collection of mapping tools from natural language processing, multidimensional network analysis, and API interfaces for scientometric mapping .
 License: GPL-2
