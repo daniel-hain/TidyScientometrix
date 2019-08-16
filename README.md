@@ -5,8 +5,6 @@ This package is still under development, but have a bit of patience, soon first 
 
 [Rakas, Marija, and Hain, Daniel S. (in press). "The state of innovation system research: What happens beneath the surface?." Research Policy](https://www.sciencedirect.com/science/article/pii/S0048733319301027)
 
-It will also offer s set of 
-
 # Planned functionality
 In detail, the package will enable:
 
