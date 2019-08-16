@@ -5,6 +5,15 @@ This package is still under development, but have a bit of patience, soon first 
 
 [Rakas, Marija, and Hain, Daniel S. (in press). "The state of innovation system research: What happens beneath the surface?." Research Policy](https://www.sciencedirect.com/science/article/pii/S0048733319301027)
 
+It will also offer s set of 
+
+
+
+```{r}
+install_github("daniel-hain/TidyScientometrix", update = "always")
+```
+
+
 # Planned functionality
 In detail, the package will enable:
 
@@ -16,7 +25,5 @@ In detail, the package will enable:
 * Coherence & diversity mapping of coupling communities
 * LDA topic modeling of paper abstracts
 
-```{r}
-install_github("daniel-hain/TidyScientometrix", update = "always")
-```
+
 
