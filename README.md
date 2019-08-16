@@ -16,5 +16,7 @@ In detail, the package will enable:
 * Coherence & diversity mapping of coupling communities
 * LDA topic modeling of paper abstracts
 
-
+```{r}
+install_github("daniel-hain/TidyScientometrix", update = "always")
+```
 
