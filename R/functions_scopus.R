@@ -3,18 +3,16 @@
 ##################################################################
 #' read_scopus_csv_collection()
 #'
-#' Reads and parses a collection of csv files from Scopus
+#' Reads and parses a collection of multiple csv files from Scopus (wrapper around read_scopus).
 #'
-#' Takes a weighted edge-list and adjusts the weight by dividing the two nodes
-#' union by their intercept.
+#' XXXXXXXXXX
 #'
-#' @param i The outgoing node in an edgelist.
-#' @param j The outgoing node in an edgelist.
-#' @param w The weight of the edge between i and j.
+#' @param file_list The paths to the downloaded Scopus csv files.
+#' @param TC_min
 #' @export
 # Reads a collection of CSV obtained from scopus and parses it nicely. Wrapper around read_scopus_csv():
 
-read_scopus_collection <- function(file_list, TC_min = 0, TC_year_min = 0, PY_max = Inf, PY_min = 0, n_max = Inf, type = NULL, fields = NULL, exclude = NULL) {
+read_scopus_collection <- function(file_list, TC_min = 0, TC_year_min = 0, PY_min = 0, PY_max = Inf, n_max = Inf, type = NULL, fields = NULL, exclude = NULL) {
 
   x <- tibble()
   for(i in 1:length(file_list)) {
