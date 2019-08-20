@@ -1,17 +1,23 @@
 ##################################################################
-##	BEGIN: read_scopus_csv_collection():
+##	BEGIN: read_scopus_collection():
 ##################################################################
-#' read_scopus_csv_collection()
+#' Read Scopus collection
 #'
 #' Reads and parses a collection of multiple csv files from Scopus (wrapper around read_scopus).
 #'
-#' XXXXXXXXXX
+#' With this function, multiple Scopus csv downloads can be read and parsed.
 #'
 #' @param file_list The paths to the downloaded Scopus csv files.
-#' @param TC_min
+#' @param TC_min Minimal number of citations for the publication to be included.
+#' @param TC_year_min Minimal number of annual citations for the publication to be included.
+#' @param PY_min Earliest year of publication to be included.
+#' @param PY_max Latest year of publication to be included.
+#' @param n_max Only include the first n publications per file.
+#' @param type Latest year of publication to be included.
+#' @param type Type of report, either "complete" or "reduced". Either type or fields has to be specified.
+#' @param fields Fields to include. Either type or fields has to be specified.
+#' @param exclude Fields to exclude
 #' @export
-# Reads a collection of CSV obtained from scopus and parses it nicely. Wrapper around read_scopus_csv():
-
 read_scopus_collection <- function(file_list, TC_min = 0, TC_year_min = 0, PY_min = 0, PY_max = Inf, n_max = Inf, type = NULL, fields = NULL, exclude = NULL) {
 
   x <- tibble()
@@ -33,10 +39,24 @@ read_scopus_collection <- function(file_list, TC_min = 0, TC_year_min = 0, PY_mi
 ##################################################################
 ##	BEGIN: read_scopus_csv():
 ##################################################################
-# Wrapper around different types of reading the data
-
+#' Read Scopus collection
+#'
+#' Reads and parses a collection of multiple csv files from Scopus (wrapper around read_scopus).
+#'
+#' With this function, multiple Scopus csv downloads can be read and parsed.
+#'
+#' @param file_list The paths to the downloaded Scopus csv files.
+#' @param TC_min Minimal number of citations for the publication to be included.
+#' @param TC_year_min Minimal number of annual citations for the publication to be included.
+#' @param PY_min Earliest year of publication to be included.
+#' @param PY_max Latest year of publication to be included.
+#' @param n_max Only include the first n publications per file.
+#' @param type Latest year of publication to be included.
+#' @param type Type of report, either "complete" or "reduced". Either type or fields has to be specified.
+#' @param fields Fields to include. Either type or fields has to be specified.
+#' @param exclude Fields to exclude
+#' @export
 read_scopus <- function(file, TC_min = 0, TC_year_min = 0, PY_max = Inf, PY_min = 0, n_max = Inf, type = NULL, fields = NULL, exclude = NULL){
-require(data.table)
 
   # Check if all there
   if(is_null(type) & is_null(fields)){break("Either a type or a number of fields have to be specified.")}
@@ -45,11 +65,11 @@ require(data.table)
   # Select fields
   tag <- fields
   if(!is_null(type)){
-    if(type == "complete"){tag <- scopus_field_names %>% pull(TAG)}
-    if(type == "reduced"){tag <- select_reduced}
+    if(type == "complete"){tag <- data("scopus_field_names", package = "TidyScientometrix") %>% pull(TAG)}
+    if(type == "reduced"){tag <- data("select_reduced", package = "TidyScientometrix")}
   }
 
-  selection <- scopus_field_names %<>%
+  selection <- data("scopus_field_names", package = "TidyScientometrix") %<>%
     filter(TAG %in% tag)
 
   # Read the file
@@ -100,22 +120,29 @@ require(data.table)
 }
 
 
-
-
-
-
-
-
 ##################################################################
 ##	BEGIN: scopus_search_ID():
 ##################################################################
-# Retrieves scopus articles (abstracts) via ID search. Therefore, up to 25-200 entries can be recieved for 1 request.
-
+#' Scopus bulk download by ID
+#'
+#' Retrieves scopus articles via ID search.
+#'
+#' Retrieves scopus articles (abstracts) via ID search. Therefore, up to 25-200 entries can be recieved for 1 request.
+#'
+#' @param ID An scopus identifier (or a vector of many). Can be either the EID or DOI of the publication.
+#' @param idtype The type of ID provided. Either "eid" or "doi".
+#' @param datatype Up to now only "application/json" supported.
+#' @param Your scopus API key.
+#' @param content If the "complete" or "reduced" publication information should be extracted.
+#' @param start Number of ID in the vector where the iteration starts.
+#' @param retCount How many publications should be extracted per iteration. Up to now limited by Scopus.
+#' @param t_limit The time in seconds untill a new iteration starts. Limited by Scopus.
+#' @param outfile Path of the file to be saved.
+#' @export
 scopus_search_ID <- function(ID, idtype, datatype = "application/json", scopus_key, content = "complete", start = 0, retCount = 200, t_limit = 6, outfile) {
-  require(httr)
-  require(XML)
-  require(jsonlite)
-  require(tictoc)
+  #require(httr)
+  #require(XML)
+  #require(jsonlite)
 
   ## Some upfront checks
   if (content == "complete" & retCount > 25) {
@@ -183,11 +210,21 @@ scopus_search_ID <- function(ID, idtype, datatype = "application/json", scopus_k
 ##################################################################
 ##	BEGIN: scopus_document_ID():
 ##################################################################
-# Retrieves scopus documents via ID search one-by-one in different views
-
+#' Search Scopus by ID
+#'
+#' Retrieves scopus documents via ID search one-by-one in different views
+#'
+#' Retrieves scopus documents via ID search one-by-one in different views
+#'
+#' @param ID An scopus identifier (or a vector of many). Can be either the EID or DOI of the publication.
+#' @param idtype The type of ID provided. Either "eid" or "doi".
+#' @param Your scopus API key.
+#' @param content If the "complete" or "reduced" publication information should be extracted.
+#' @param start Number of ID in the vector where the iteration starts.
+#' @param t_limit The time in seconds untill a new iteration starts. Limited by Scopus.
+#' @export
 scopus_document_ID <- function(ID, idtype = "eid", type = "abstract", view = "FULL", scopus_key, start = 1, t_limit = 6) {
-
-  require(httr); require(XML); require(jsonlite)
+  #require(httr); require(XML); require(jsonlite)
 
   ID <- unique(as.character(ID))
   path <- paste("content", type, idtype, ID, sep = "/")
@@ -236,7 +273,7 @@ scopus_document_ID <- function(ID, idtype = "eid", type = "abstract", view = "FU
 ##	More utilities for scopus
 ##################################################################
 
-subset_name <- function(x, select){ x <- subset(x, names(x) %in% select) }
+subset_name <- function(x, select){ x <- x %>% subset(names(x) %in% select) }
 
 replace_NULL <- function(x){ x <- x %>% replace(is.null(.), NA) %>% replace(.== "NULL", NA) %>% replace(.== "NA", NA) %>%
   replace(.=="list()", NA) %>% replace(.=="character()", NA) %>% replace(.=="numeric()", NA)
@@ -354,7 +391,6 @@ scopus_extract_C1 <- function(x, index, level = "document"){
 ##################################################################
 ##	BEGIN: scopus_extract_SC()
 ##################################################################
-
 scopus_extract_SC <- function(x, index, level = "document"){
   x %<>%
     list.select(SC = `subject-areas`$`subject-area`) %>%
@@ -395,7 +431,6 @@ scopus_extract_FX <- function(x, index, level = "document"){
 
   return(x)
 }
-
 
 ##################################################################
 ##	BEGIN: scopus_extract_MX()
