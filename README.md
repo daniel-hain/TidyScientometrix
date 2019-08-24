@@ -5,6 +5,8 @@ This package is still under development, but have a bit of patience, soon first 
 
 [Rakas, Marija, and Hain, Daniel S. (in press). "The state of innovation system research: What happens beneath the surface?." Research Policy](https://www.sciencedirect.com/science/article/pii/S0048733319301027)
 
+It will furthermore include convenient function to compile static or interactive bibliometric reports, as for examplle illustrated at [this example of analysing the research field related to "Sustainablity transistions"](https://raw.githack.com/daniel-hain/transitions_bibliometrics_2019/master/notebooks/91_descriptives.html)
+
 # Planned functionality
 In detail, the package will enable:
 
