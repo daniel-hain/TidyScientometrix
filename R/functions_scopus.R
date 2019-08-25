@@ -206,7 +206,6 @@ scopus_search_ID <- function(ID, idtype, datatype = "application/json", scopus_k
   return(data)
 }
 
-
 ##################################################################
 ##	BEGIN: scopus_document_ID():
 ##################################################################
@@ -268,24 +267,6 @@ scopus_document_ID <- function(ID, idtype = "eid", type = "abstract", view = "FU
 }
 
 
-
-##################################################################
-##	More utilities for scopus
-##################################################################
-
-subset_name <- function(x, select){ x <- x %>% subset(names(x) %in% select) }
-
-replace_NULL <- function(x){ x <- x %>% replace(is.null(.), NA) %>% replace(.== "NULL", NA) %>% replace(.== "NA", NA) %>%
-  replace(.=="list()", NA) %>% replace(.=="character()", NA) %>% replace(.=="numeric()", NA)
-}
-
-clean_nested <- function(x) {
-  x %<>%
-    unnest() %>%
-    mutate_all(as.character) %>%
-    mutate_if(is_character, str_squish) %>%
-    replace_NULL()
-}
 
 clean_AU <- function(x) {
   x %<>%
@@ -462,4 +443,27 @@ scopus_extract_MX <- function(x, index, level = "document"){
   return(y)
 }
 
+
+
+##################################################################
+##################################################################
+##################################################################
+##	Utility functions
+##################################################################
+##################################################################
+##################################################################
+
+subset_name <- function(x, select){ x <- x %>% subset(names(x) %in% select) }
+
+replace_NULL <- function(x){ x <- x %>% replace(is.null(.), NA) %>% replace(.== "NULL", NA) %>% replace(.== "NA", NA) %>%
+  replace(.=="list()", NA) %>% replace(.=="character()", NA) %>% replace(.=="numeric()", NA)
+}
+
+clean_nested <- function(x) {
+  x %<>%
+    unnest() %>%
+    mutate_all(as.character) %>%
+    mutate_if(is_character, str_squish) %>%
+    replace_NULL()
+}
 
