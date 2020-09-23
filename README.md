@@ -22,6 +22,8 @@ In detail, the package will enable:
 
 Again, up to now, most functionality is not working properly. However, if you want to peak a bit, feel free to check out the current development version with:
 
+:)
+
 ```{r}
 devtools::install_github("daniel-hain/TidyScientometrix", update = "always")
 ```
